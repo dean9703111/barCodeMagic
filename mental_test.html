@@ -9,10 +9,15 @@
     <!-- <div id="blackLine" style="position:absolute;top:0;left:0;width:100%;height:100vh;z-index:-5"> -->
     </div>
     <style>
-        /* .img_center{
+        .img_center {
             vertical-align: center;
-            position:absolute;top:25%;left:10%;width:80%;z-index:-5;opacity:0
-        } */
+            position: absolute;
+            top: 25%;
+            left: 10%;
+            width: 80%;
+            z-index: -5;
+            opacity: 0
+        }
     </style>
 </head>
 
@@ -43,11 +48,11 @@
     $(document).ready(function () {
         console.log($(window).height())
         console.log($(window).width())
-        drawBoldLine(0,$(window).width(),0)
-        drawThinLine(0,$(window).width(),0)
+        drawBoldLine(0, $(window).width(), 0)
+        drawThinLine(0, $(window).width(), 0)
         // drawvline(0,200,200)
         function drawBoldLine(from_x, to_x, y) {
-            for (var i = from_x; i <= to_x; i += 10) {
+            for (var i = from_x; i <= to_x; i += 8) {
                 //设置div的背景  
                 var $divs = $("<div class='boldLine' style='background-color: black;z-index: 2'></div>");
                 //设置div的左侧位置  
@@ -65,7 +70,7 @@
             }
         }
         function drawThinLine(from_x, to_x, y) {
-            for (var i = from_x; i <= to_x; i += 10) {
+            for (var i = from_x; i <= to_x; i += 8) {
                 //设置div的背景  
                 var $divs = $("<div class='thinLine' style='background-color: black;z-index: 2'></div>");
                 //设置div的左侧位置  
@@ -75,19 +80,20 @@
                 //设置div的高度  
                 $divs.css("height", "100vh");
                 //设置div的宽度  
-                $divs.css("width", "2px");
+                $divs.css("width", "3px");
                 //设置div的排板方式  
                 $divs.css("position", "absolute");
                 //把div追加到body上去  
                 $("body").append($divs);
             }
         }
-        
+
     });
     function change_img(img_name) {
 
         $("button").attr("disabled", "disabled");
-
+        // $(".boldLine").animate({ opacity: 0.7 }, 3000);
+        // $("#" + img_name + "_jpg").animate({ opacity: 0.08 }, 3000);
         var $show = $('#show'),
             led, x, y, z,
             a = 0,
@@ -114,7 +120,7 @@
                         a = 1;
                         // $("#main_jpg").animate({ opacity: 0 }, 3000);
                         $(".boldLine").animate({ opacity: 0.7 }, 3000);
-                        $("#" + img_name + "_jpg").animate({ opacity: 0.5 }, 3000);
+                        $("#" + img_name + "_jpg").animate({ opacity: 0.08 }, 3000);
                     }
                 }
 
