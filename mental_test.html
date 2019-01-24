@@ -3,13 +3,16 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title></title>
+
+    <!-- <div id="blackLine" style="position:absolute;top:0;left:0;width:100%;height:100vh;z-index:-5"> -->
+    </div>
     <style>
-        .img_center{
+        /* .img_center{
             vertical-align: center;
             position:absolute;top:25%;left:10%;width:80%;z-index:-5;opacity:0
-        }
+        } */
     </style>
 </head>
 
@@ -24,29 +27,65 @@
     <button title="花" style="width:50%;height:25vh;float: left;z-index:1; opacity: 0;" onclick="change_img('flower')"></button>
     <button title="波浪" style="width:50%;height:25vh;float: left;z-index:1; opacity: 0;" onclick="change_img('wave')"></button>
 
-    <img id="main_jpg" style="position:absolute;top:0;left:0;width:100%;height:100vh;z-index:-5" src="mental_img/main.jpg" />
-    <img id="sun_jpg" class="img_center" src="mental_img/sun.jpg"
-    />
-    <img id="moon_jpg" class="img_center" src="mental_img/moon.jpg"
-    />
-    <img id="star_jpg"  class="img_center" src="mental_img/star.jpg"
-    />
-    <img id="smile_jpg"  class="img_center" src="mental_img/smile.jpg"
-    />
-    <img id="matchstick_jpg"  class="img_center" src="mental_img/matchstick.jpg"
-    />
-    <img id="tree_jpg"  class="img_center" src="mental_img/tree.jpg"
-    />
-    <img id="flower_jpg"  class="img_center" src="mental_img/flower.jpg"
-    />
-    <img id="wave_jpg"  class="img_center" src="mental_img/wave.jpg"
-    />
+    <!-- <img id="main_jpg" style="position:absolute;top:0;left:0;width:100%;height:100vh;z-index:-5" src="mental_img/main.jpg" /> -->
+    <img id="sun_jpg" class="img_center" src="mental_img/sun.jpg" />
+    <img id="moon_jpg" class="img_center" src="mental_img/moon.jpg" />
+    <img id="star_jpg" class="img_center" src="mental_img/star.jpg" />
+    <img id="smile_jpg" class="img_center" src="mental_img/smile.jpg" />
+    <img id="matchstick_jpg" class="img_center" src="mental_img/matchstick.jpg" />
+    <img id="tree_jpg" class="img_center" src="mental_img/tree.jpg" />
+    <img id="flower_jpg" class="img_center" src="mental_img/flower.jpg" />
+    <img id="wave_jpg" class="img_center" src="mental_img/wave.jpg" />
 </body>
 <script src="js/jquery.js"></script>
 <script src="js/shake.js"></script>
 <script>
-    function change_img(img_name) {
+    $(document).ready(function () {
+        console.log($(window).height())
+        console.log($(window).width())
+        drawBoldLine(0,$(window).width(),0)
+        drawThinLine(0,$(window).width(),0)
+        // drawvline(0,200,200)
+        function drawBoldLine(from_x, to_x, y) {
+            for (var i = from_x; i <= to_x; i += 10) {
+                //设置div的背景  
+                var $divs = $("<div class='boldLine' style='background-color: black;z-index: 2'></div>");
+                //设置div的左侧位置  
+                $divs.css("left", i);
+                //设置div的上方位置  
+                $divs.css("top", y);
+                //设置div的高度  
+                $divs.css("height", "100vh");
+                //设置div的宽度  
+                $divs.css("width", "4px");
+                //设置div的排板方式  
+                $divs.css("position", "absolute");
+                //把div追加到body上去  
+                $("body").append($divs);
+            }
+        }
+        function drawThinLine(from_x, to_x, y) {
+            for (var i = from_x; i <= to_x; i += 10) {
+                //设置div的背景  
+                var $divs = $("<div class='thinLine' style='background-color: black;z-index: 2'></div>");
+                //设置div的左侧位置  
+                $divs.css("left", i);
+                //设置div的上方位置  
+                $divs.css("top", y);
+                //设置div的高度  
+                $divs.css("height", "100vh");
+                //设置div的宽度  
+                $divs.css("width", "2px");
+                //设置div的排板方式  
+                $divs.css("position", "absolute");
+                //把div追加到body上去  
+                $("body").append($divs);
+            }
+        }
         
+    });
+    function change_img(img_name) {
+
         $("button").attr("disabled", "disabled");
 
         var $show = $('#show'),
@@ -73,8 +112,9 @@
                     var speed = Math.abs((x + y + z - last_x - last_y - last_z)) / diffTime * 10000;
                     if (speed > shak_threshold && a < 1) {
                         a = 1;
-                        $("#main_jpg").animate({ opacity: 0 }, 3000);
-                        $("#" + img_name + "_jpg").animate({ opacity: 1 }, 3000);
+                        // $("#main_jpg").animate({ opacity: 0 }, 3000);
+                        $(".boldLine").animate({ opacity: 0.7 }, 3000);
+                        $("#" + img_name + "_jpg").animate({ opacity: 0.5 }, 3000);
                     }
                 }
 
